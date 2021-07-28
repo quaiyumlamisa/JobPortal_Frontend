@@ -1,0 +1,550 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Sidebar 01</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">	
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+		
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+				<div class="p-4 pt-5"> 		
+	        <ul class="list-unstyled components mb-5">   
+                    <li class="active">
+                        <a [routerLink]="" (click)="showprofile()" >Show account info</a>
+                    </li>
+
+                    <li>
+                        <a [routerLink]="" (click)=" editprofile()">Edit account info</a>
+                    </li>
+
+                    <li>
+                        <a [routerLink]="" (click)=" deleteprofile()">Delete account</a>
+                    </li>
+
+	          <li>
+              <a [routerLink]="" (click)="postjob()">Post jobs</a>
+	            
+	          </li>
+
+            <li>
+              <a [routerLink]="" (click)="showjobs()" >Show posted jobs</a>
+            </li>
+           
+	          <li>
+              <a [routerLink]="" (click)="showseekerlist()">Jobseeker's list</a>
+	          </li>
+	          <li>
+              <a [routerLink]="" (click)="showapplications()">Applicant's list</a>
+             
+	          </li>
+	          <li>
+              <a [routerLink]="" (click)="showalljobs()"> All Jobposts</a>
+	          </li>
+	        
+	        </ul>
+
+	      </div>
+    	</nav>
+
+        <!-- Page Content  -->
+      <div id="content" class="p-4 p-md-5">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
+
+            <button type="button" id="sidebarCollapse" class="btn btn-primary">
+              <i class="fa fa-bars"></i>
+              <span class="sr-only">Toggle Menu</span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="nav navbar-nav ml-auto">
+                <li class="nav-item active">
+                  <button class="btn btn-danger my-2 my-sm-0" (click)="  onLogout()" >Logout</button>
+               
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+             <!-- Main Content  -->
+             <div class="tab1" *ngIf="counter1">  
+                
+              <table id="customers" style="width:100%" border="1">  
+                  <tr> 
+                      <th>FullName</th>
+                      <th>PhoneNumber</th>
+                      <th>Email</th>     
+                  </tr>
+
+                  <tr *ngFor="let j1 of jobseeker">
+                      <td>{{j1.fullName}}</td>
+                      <td>{{j1.phoneNumber}}</td>
+                      <td>{{j1.email}}</td>
+                      
+                  </tr>
+  
+              </table>
+          </div>
+
+          <div class="tab2" *ngIf="userDetails && showpro" >         
+            <h1 style="text-align: center;">Profile Information</h1>
+               <table style="width: 100%;" border="1">
+                
+                <tr>
+                    <td height="50"><strong>Companyname</strong> </td>
+                    <td height="50">{{userDetails.companyName}}</td>     
+                </tr>
+
+                <tr>
+                    <td height="50"><strong>Contactperson</strong></td>  
+                    <td height="50">{{userDetails.contactPerson}}</td>      
+               </tr>
+
+               <tr>
+                  <td height="50"><strong>Location</strong></td>
+                  <td height="50">{{userDetails.location}}</td>   
+               </tr>
+
+               <tr>                
+                  <td height="50"><strong>ContactNumber</strong></td>
+                  <td height="50">{{userDetails.contactNumber}}</td> 
+              </tr>
+
+               <tr>               
+                  <td height="50"><strong>Email</strong></td>
+                  <td height="50">{{userDetails.email}}</td>                                   
+               </tr>
+              
+          </table>
+          
+         </div>
+
+
+         <div class="editprof " *ngIf="editpro">
+          <form [formGroup]="form" autocomplete="off" (ngSubmit)="submit()" >
+
+            <div class="form-group">
+              <label for="companyname">Company Name:</label>
+                <input 
+                    formControlName="companyName"
+                    id="companyname" 
+                    type="text"                          
+                    placeholder=""
+                    class="form-control">
+              
+            </div>
+
+             <div class="form-group">
+              <label for="contactperson">Contact person:</label>
+                  <input 
+                      formControlName="contactPerson"
+                      id="contactperson" 
+                      type="text" 
+                      placeholder=""
+                      class="form-control">
+   
+              </div>
+           
+              <div class="form-group">
+                <label for="location">Location:</label>
+                      <input 
+                            formControlName="location"
+                            id="location" 
+                            type="text"                             
+                            placeholder=""
+                            class="form-control">
+        
+                </div>
+          
+          
+                <div class="form-group">
+                  <label for="contactnumber">Contact Number:</label>           
+                        <input 
+                            formControlName="contactNumber"
+                            id="mobileNumber" 
+                            type="text"                                
+                            placeholder=""
+                            class="form-control">            
+                </div>
+                 
+                <div class="form-group">
+                  <label for="email">Email:</label>
+                      <input 
+                          formControlName="email"
+                          id="email" 
+                          type="text"                              
+                          placeholder=""
+                          class="form-control">
+                </div>
+          
+          
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input 
+                      formControlName="password"
+                      id="password" 
+                      type="password"
+                      class="form-control">
+                 
+               </div>
+
+              <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Update</button>
+         
+      </form>
+      </div>
+
+
+
+          <div class="postjob " *ngIf="pj">
+           <form [formGroup]="form1" autocomplete="off" (ngSubmit)="submit1()" >
+
+          <div class="form-group">
+            <label for="jobTitle">JobTitle:</label>
+              <input 
+                  formControlName="jobTitle"
+                  id="jobTitle" 
+                  type="text"  
+                  [(ngModel)]="job.jobTitle"                        
+                  placeholder=""
+                  class="form-control">
+
+          </div>
+
+          <div class="form-group">
+            <label for="jobDescription">JobDescription:</label>
+                <input      
+                    formControlName="jobDescription"
+                    id="jobDescription" 
+                    type="text" 
+                    [(ngModel)]="job.jobDescription"
+                    placeholder=""
+                    class="form-control">
+ 
+            </div>
+  
+  
+  
+              <div class="form-group">
+                <label for="jobType">JobType:</label>
+                      <input 
+                          formControlName="jobType"
+                          id="jobType" 
+                          type="text"    
+                          [(ngModel)]="job.jobType"                         
+                          placeholder=""
+                          class="form-control"> 
+              </div>
+        
+        
+              <div class="form-group">
+                <label for="experience">Experience:</label>
+                      <input 
+                          formControlName="experience"
+                          id="experience" 
+                          type="text"    
+                          [(ngModel)]="job.experience"                            
+                          placeholder=""
+                          class="form-control">                  
+              </div>
+  
+  
+  
+                  <div class="form-group">
+                    <label for="salary">Salary:</label>
+                        <input 
+                            formControlName="salary"
+                            id="salary" 
+                            type="text"   
+                            [(ngModel)]="job.salary"                           
+                            placeholder=""
+                            class="form-control">
+                    </div>
+            
+            
+                  <div class="form-group">
+                    <label for="vacancy">Vacancy</label>
+                    <input 
+                        formControlName="vacancy"
+                        id="vacancy" 
+                        type="number"
+                        [(ngModel)]="job.vacancy"
+                        class="form-control">
+                  
+                   </div>
+
+                 <div class="form-group">
+                    <label for="qualification">Qualification</label>
+                    <input 
+                        formControlName="qualification"
+                        id="qualification" 
+                        type="text"
+                        [(ngModel)]="job.qualification"
+                        class="form-control">
+                
+                  </div>
+
+                    <div class="form-group">
+                      <label for="skills"> Skills</label>
+                      <input 
+                          formControlName="skills"
+                          id="skills" 
+                          type="text"
+                          [(ngModel)]="job.skills"
+                          class="form-control">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="lastDate">LastDate</label>
+                    <input 
+                        formControlName="lastDate"
+                        id="lastDate" 
+                        type="date"
+                        [(ngModel)]="job.lastDate"
+                        class="form-control">
+                  
+                </div>
+
+                <div class="form-group">
+                  <label for="location">location</label>
+                  <input 
+                      formControlName="location"
+                      id="location" 
+                      type="text"
+                      [(ngModel)]="job.location"
+                      class="form-control">
+                
+                </div>
+
+              <button class="btn btn-primary" type="submit" [disabled]="!form1.valid">Post</button>
+ 
+          </form>
+          </div>
+
+
+
+
+        <div class="editjob " *ngIf="edit">
+          <form [formGroup]="form1" autocomplete="off" (ngSubmit)="Update()" >
+
+
+
+              <div class="form-group">
+                <label for="jobTitle">JobTitle:</label>
+                  <input 
+
+                      formControlName="jobTitle"
+                      id="jobTitle" 
+                      type="text"                           
+                      placeholder=""    
+                      class="form-control">         
+
+              </div>
+
+              <div class="form-group">
+                <label for="jobDescription">JobDescription:</label>
+                    <input 
+                        formControlName="jobDescription"
+                        id="jobDescription" 
+                        type="text"             
+                        placeholder=""       
+                       class="form-control">
+      
+                </div>
+   
+                    <div class="form-group">
+                      <label for="jobType">JobType:</label>
+                            <input 
+                                formControlName="jobType"
+                                id="jobType" 
+                                type="text"                                                         
+                                placeholder=""
+                                class="form-control">
+  
+                    </div>
+              
+              
+                    <div class="form-group">
+                      <label for="experience">Experience:</label>
+                        <input 
+                                formControlName="experience"
+                                id="experience" 
+                                type="text"                                                              
+                                placeholder=""
+                                class="form-control">            
+                    </div>
+              
+              
+              
+                    <div class="form-group">
+                      <label for="salary">Salary:</label>
+                          <input 
+              
+                              formControlName="salary"
+                              id="salary" 
+                              type="text"                                                       
+                              placeholder=""
+                              class="form-control">
+
+                      </div>
+              
+              
+                    <div class="form-group">
+                      <label for="vacancy">Vacancy</label>
+                      <input 
+                          formControlName="vacancy"
+                          id="vacancy" 
+                          type="number"                          
+                          class="form-control">
+                    
+                    </div>
+
+                    <div class="form-group">
+                      <label for="qualification">Qualification</label>
+                      <input 
+                          formControlName="qualification"
+                          id="qualification" 
+                          type="text"                      
+                          class="form-control">
+                    
+                    </div>
+
+                  <div class="form-group">
+                    <label for="skills"> Skills</label>
+                    <input 
+                        formControlName="skills"
+                        id="skills" 
+                        type="text"                    
+                        class="form-control">
+                  
+                  </div>
+
+                 <div class="form-group">
+                  <label for="lastDate">LastDate</label>
+                   <input 
+                      formControlName="lastDate"
+                      id="lastDate" 
+                      type="date"                     
+                      class="form-control">
+                
+                 </div>
+
+                <div class="form-group">
+                  <label for="location">location</label>
+                  <input 
+                      formControlName="location"
+                      id="location" 
+                      type="text"      
+                      class="form-control">
+                
+                </div>
+                <button class="btn btn-primary" type="submit">Update</button>
+ 
+          </form>
+          </div>
+
+
+
+
+
+              <div class="tab4" *ngIf="sj">  
+                      
+                <table id="customers" style="width:100%" border="1">  
+                        <tr>
+                            
+                            <th>JobTitle</th>
+                            <th>JobDescription</th>
+                            <th>JobType</th>
+                            <th>Experience</th>
+                            <th>Salary</th>
+                            <th>Vacancy</th> 
+                            <th>Qualification</th>
+                            <th>Skills</th>
+                            <th>LastDate</th>
+                            <th>Location</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+
+                        </tr>
+                        <tr *ngFor="let j2 of joblists">
+                          
+                            <td>{{j2.jobTitle}}</td>
+                            <td>{{j2.jobDescription}}</td>
+                            <td>{{j2.jobType}}</td>
+                            <td>{{j2.experience}}</td>
+                            <td>{{j2.salary}}</td>
+                            <td>{{j2.vacancy}}</td> 
+                            <td>{{j2.qualification}}</td>
+                            <td>{{j2.skills}}</td>
+                            <td>{{j2.lastDate}}</td>
+                            <td>{{j2.location}}</td> 
+                            <td><button class="btn btn-primary" (click)="editjob(j2)">Edit</button></td>
+                            <td><button class="btn btn-danger" (click)="deletejob(j2.mapId)">Delete</button></td>
+                        </tr>
+
+                  </table>
+                  </div>
+
+
+                  <div class="tab5" *ngIf="list">         
+                    <table id="customers" style="width:100%" border="1">  
+                            <tr>
+                              <th>Jobtitle</th>
+                              <th>Jobtype</th>
+                              <th>LastDate</th>
+                              <th>Applicant's name</th>
+                              <th>Applicant's cv</th>
+                            </tr>
+
+                            <tr *ngFor="let i of applylists">
+                              <td>{{i.jobTitle}}</td>
+                              <td>{{i.jobType}}</td>
+                              <td>{{i.lastDate}}</td>
+                              <td>{{i.name}}</td>
+                              <td><a href={{createlink(i.filepath)}}>CV</a></td>
+                            </tr>
+            
+
+                </table>
+                </div>
+
+                <div class="tab6" *ngIf="showall">   
+                  <table id="customers" style="width:100%" border="1">  
+                              <tr>
+                                  <th>CompanyName</th> 
+                                  <th>JobTitle</th>
+                                  <th>JobDescription</th>
+                                  <th>JobType</th>
+                                  <th>Experience</th>
+                                  <th>Salary</th>
+                                  <th>Vacancy</th> 
+                                  <th>Qualification</th>
+                                  <th>Skills</th>
+                                  <th>LastDate</th>
+                                  <th>Location</th>
+
+                              </tr>
+                              <tr *ngFor="let j2 of joblists1">
+                                  <td>{{j2.companyName}}</td> 
+                                  <td>{{j2.jobTitle}}</td>
+                                  <td>{{j2.jobDescription}}</td>
+                                  <td>{{j2.jobType}}</td>
+                                  <td>{{j2.experience}}</td>
+                                  <td>{{j2.salary}}</td>
+                                  <td>{{j2.vacancy}}</td> 
+                                  <td>{{j2.qualification}}</td>
+                                  <td>{{j2.skills}}</td>
+                                  <td>{{j2.lastDate}}</td>
+                                  <td>{{j2.location}}</td> 
+                              </tr>
+                    </table>
+                </div>
+
+		</div>
+
+

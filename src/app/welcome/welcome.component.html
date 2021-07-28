@@ -1,0 +1,95 @@
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+</head>
+<body>
+<div id="navbar">
+    <span>
+        <img src="assets\logo1.jpg" height="49px" width="150px">
+    </span>
+    <a class="active" routerLink="welcome-page"> Home</a>    
+    <a routerLink="login">Login</a>
+  </div>
+
+
+   <div class="top1">
+        <img src="assets\cover2.jpg" height="700px" width="100%">
+    </div>
+
+    <div class="container pt-5">
+        <h2>Recent jobs</h2>
+            <div *ngFor="let job of joblists | slice:0:3; let i = index;">
+                  <div class="rounded border border-primary jobs-wrap">                 
+                      <div class="company-logo blank-logo text-center text-md-left pl-3">
+                           <div class="job-details h-50">                             
+                               <div class="p-3 align self-center">                                  
+                                     <h3>{{job.jobTitle}}</h3>
+                       
+                                    <div class="mr-3">
+                                        <span class="material-icons">location_on</span>
+                                        {{job.companyName}}
+                                    </div>
+                         
+                                    <div class="mr-3">
+                                        <span class="fa fa-money"></span> ${{job.salary}}     
+                                    </div>                     
+                                </div>
+                            </div>
+
+                            <div class="job category align self-center">
+                                <div class="p-3">
+                                    <span class="text-info p-2 rounded border border-info">{{job.jobType}}</span>
+                                </div>
+                            </div>
+            
+                        </div>
+                    
+                    </div>                 
+            </div>
+        </div>
+  
+   <div class="reg">
+       
+           <div class="reg1">
+    
+                <img src="assets\boss.jpg" alt="Avatar" class="image" width="100%" height="50%">
+
+                <div class="text">
+                    <a routerLink="signupemp" routerLinkActive="active" class="button"> Signup</a> 
+                </div>
+            </div>
+
+            <div class="reg2">
+
+                 <img src="assets\jobseeker1.jpg" alt="Avatar" class="image" width="100%" height="50%">
+
+                 <div class="text1">
+                      <a routerLink="signupseeker" routerLinkActive="active" class="button"> Signup</a> 
+                 </div>
+            </div>
+
+
+    </div>
+
+    <div>
+
+       
+        
+      
+
+    
+    
+
+    
+  
+    
+    
+     
+       
+  

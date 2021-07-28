@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Sidebar 01</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">		
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  </head>
+  <body>
+		
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+				<div class="p-4 pt-5">                       
+                    <ul class="list-unstyled components mb-5">
+                        
+                               
+                                    <li class="active">
+                                        <a [routerLink]="" (click)=" showprofile()" >Show account info</a>
+                                    </li>
+
+                                    <li>
+                                        <a [routerLink]="" (click)="editprofile()">Edit account info</a>
+                                    </li>
+
+                                    <li>
+                                        <a [routerLink]="" (click)="deleteprofile()">Delete account</a>
+                                    </li>
+                                           
+                                    <li>
+                                    <a [routerLink]="" (click)=" uploadcv()">Upload cv</a>
+                                    </li>
+                                    <li>
+                                    <a [routerLink]="" (click)= "showjobs()">Joblist</a>
+                                    
+                                    </li>
+                                    <li>
+                                        <a [routerLink]="" (click)=" showapplications()">Show applications</a>
+                                    </li>
+                                    
+                                    </ul>
+
+	            </div>
+        	</nav>
+
+        <!-- Page Content  -->
+            <div id="content" class="p-4 p-md-5">
+
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container-fluid">
+
+                        <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                        <i class="fa fa-bars"></i>
+                        <span class="sr-only">Toggle Menu</span>
+                        </button>
+                
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="nav navbar-nav ml-auto">
+                                <li class="nav-item active">
+                                <button class="btn btn-danger my-2 my-sm-0" (click)="onLogout()" >Logout</button>
+                            
+                            </ul>
+                        </div>
+                     </div>
+                </nav>
+
+
+
+                 <!-- Main Content  -->
+
+                 <div class="tab1" *ngIf="userDetails && showpro">  
+
+                    <table style="width:70%" border="1">  
+                        <tr> 
+                           <td>FullName:</td>
+                           <td>{{userDetails.fullName}}</td>                                                
+                       </tr>
+
+                       <tr>
+                           <td>Mobile Number:</td>
+                           <td>{{userDetails.phoneNumber}}</td>
+                       </tr>
+                       
+                       <tr>
+                            <td>Email:</td>
+                            <td>{{userDetails.email}}</td>
+                       </tr>
+                       <tr>
+                        <td>Password:</td>
+                       <td>{{userDetails.password}}</td>
+                   </tr>
+                      
+                    </table>
+                   </div>
+
+
+                   <div class="editprof " *ngIf="editpro">
+
+                    <form [formGroup]="form" autocomplete="off" (ngSubmit)="submit()" >
+                        <div class="form-group">
+                            <label for="fullname">FullName:</label>
+
+                            <input 
+                                formControlName="fullname"
+                                id="fullname" 
+                                type="text" 						
+                                placeholder="Fullname"
+                                class="form-control">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="phoneNumber">Mobile Number:</label>
+                            <input 
+								formControlName="phoneNumber"
+								id="phoneNumber" 
+								type="text" 								
+								placeholder="Contact Number"
+								class="form-control">
+	  
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input 				
+                                        formControlName="email"
+                                        id="email" 
+                                        type="text"                                      
+                                        placeholder="Email"
+                                        class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password">Password:</label>
+                                    <input 
+                                        formControlName="password"
+                                        id="password" 
+                                        type="text"
+                                        placeholder="Password"
+                                        class="form-control">
+                            </div>
+
+                        <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Update</button>
+               
+                    </form>
+
+	     	</div>
+
+             <div class="upload cv" *ngIf="cv" >
+                    <article class="container container-fluid">
+                        <section class="create" *ngIf="isCreate">
+                        <h1>Upload cv</h1>
+                        <form>
+                          <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
+                            <div class="row">
+                            <div class="offset-md-5 col-md-2">
+                                <button type="button" class="btn btn-primary" (click)="onCreate()">Upload </button>
+                            </div>
+                            </div>
+                        </form>
+                        </section>
+                
+                      </article>
+            </div>
+
+          <div *ngIf="!isCreate">          
+               <p><a href={{cvpath}}>show cv</a>.</p>          
+          </div>
+
+          <div class="tab3" *ngIf="counter3">  
+        
+
+            <form [formGroup]="form1" autocomplete="off" (ngSubmit)="Search()">
+                <input 
+
+                    formControlName="search"
+                    id="search" 
+                    type="text" 
+                    [(ngModel)]="job"
+                    placeholder="Search by jobtitle"
+                    class="form-control">
+
+                   <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Search</button>
+            </form>
+
+            <table id="customers" style="width:100%" border="1">  
+                <tr>
+                    <th>CompanyName</th> 
+                    <th>JobTitle</th>
+                    <th>JobDescription</th>
+                    <th>JobType</th>
+                    <th>Experience</th>
+                    <th>Salary</th>
+                    <th>Vacancy</th> 
+                    <th>Qualification</th>
+                    <th>Skills</th>
+                    <th>LastDate</th>
+                    <th>Location</th>
+                    <th>Apply</th>
+
+                </tr>
+                <tr *ngFor="let j2 of joblists">
+                    <td>{{j2.companyName}}</td> 
+                    <td>{{j2.jobTitle}}</td>
+                    <td>{{j2.jobDescription}}</td>
+                    <td>{{j2.jobType}}</td>
+                    <td>{{j2.experience}}</td>
+                    <td>{{j2.salary}}</td>
+                    <td>{{j2.vacancy}}</td> 
+                    <td>{{j2.qualification}}</td>
+                    <td>{{j2.skills}}</td>
+                    <td>{{j2.lastDate}}</td>
+                    <td>{{j2.location}}</td> 
+                    <td><button class="del" (click)="apply(j2.mapId)">Apply</button></td>
+                </tr>
+
+                </table>
+                </div>
+
+
+
+                <div class="tab4" *ngIf="counter4">  
+
+                <table id="customers" style="width:100%" border="1">  
+                    <tr>
+                        <th>CompanyName</th> 
+                        <th>JobTitle</th>
+                        <th>JobDescription</th>
+                        <th>JobType</th>
+                        <th>Experience</th>
+                        <th>Salary</th>
+                        <th>Vacancy</th> 
+                        <th>Qualification</th>
+                        <th>Skills</th>
+                        <th>LastDate</th>
+                        <th>Location</th>
+                        <th>Apply</th>
+
+                    </tr>
+                    <tr *ngFor="let j2 of joblists1">
+                        <td>{{j2.companyName}}</td> 
+                        <td>{{j2.jobTitle}}</td>
+                        <td>{{j2.jobDescription}}</td>
+                        <td>{{j2.jobType}}</td>
+                        <td>{{j2.experience}}</td>
+                        <td>{{j2.salary}}</td>
+                        <td>{{j2.vacancy}}</td> 
+                        <td>{{j2.qualification}}</td>
+                        <td>{{j2.skills}}</td>
+                        <td>{{j2.lastDate}}</td>
+                        <td>{{j2.location}}</td> 
+                        <td><button class="btn btn-danger" (click)="apply(j2.mapId)">Apply</button></td>
+                    </tr>
+
+                    </table>
+                    </div>
+
+
+                <div class="tab5" *ngIf="apc">  
+        
+                    <table id="customers" style="width:100%" border="1">  
+                        <tr>
+                           <th>Companyname</th>
+                          <th>Jobtitle</th>
+                          <th>Jobtype</th>
+                          <th>LastDate</th>                      
+                        </tr>
+                        <tr *ngFor="let i of applylists">
+                          <td>{{i.companyName}}</td>
+                          <td>{{i.jobTitle}}</td>
+                          <td>{{i.jobType}}</td>
+                          <td>{{i.lastDate}}</td>
+                          
+                        </tr>
+                        
+            
+                      </table>
+                      </div>
+
+
+
+        
+       
+
+
+  
+
+

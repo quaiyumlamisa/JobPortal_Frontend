@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login Page</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">	
+</head>
+<body>
+<div class="container">
+	<div class="d-flex justify-content-center h-100">
+		<div class="card">
+			<div class="card-header">
+				<h3>Sign In</h3>				
+			</div>
+
+			<div class="card-body">
+				<form [formGroup]="form" autocomplete="off" (ngSubmit)="submit()" >
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						<input 
+							formControlName="fullname"
+							id="fullname" 
+							type="text" 
+							[(ngModel)]="seeker.fullName"
+							placeholder="Fullname"
+							class="form-control">
+
+                           <div *ngIf="f.fullname.touched && f.fullname.invalid" class="alert alert-danger">
+                                <div *ngIf="f.fullname.errors?.required">Fullname is required.</div>
+                           </div>
+				    </div>
+		
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fa fa-phone"></i></span>
+						</div>
+								<input 
+								formControlName="mobileNumber"
+								id="mobileNumber" 
+								type="text" 
+								[(ngModel)]="seeker.phoneNumber"
+								placeholder="Contact Number"
+								class="form-control">
+	  
+						<div *ngIf="f.mobileNumber.touched && f.mobileNumber.invalid" class="alert alert-danger">
+							<div *ngIf="f.mobileNumber.errors?.required">Mobile Number is required.</div>
+							<div *ngIf="f.mobileNumber.errors?.pattern">Please, Enter 11 digit Mobile Number.</div>
+						</div>
+					</div>
+
+
+                    <div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fa fa-envelope"></i></span>
+						</div>
+						<input 			
+							formControlName="email"
+							id="email" 
+							type="text" 
+							[(ngModel)]="seeker.email"
+							placeholder="Email"
+							class="form-control">
+		
+						<div *ngIf="f.email.touched && f.email.invalid" class="alert alert-danger">
+							<div *ngIf="f.email.errors?.required">Email is required.</div>
+							<div *ngIf="f.email.errors?.email">Please, enter valid email address.</div>
+				    	</div>
+					</div>
+
+
+                    <div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fa fa-lock"></i></span>
+						</div>
+						<input 
+							formControlName="password"
+							id="password" 
+							type="password"
+							[(ngModel)]="seeker.password" 
+							placeholder="Password"
+							class="form-control">
+						
+						<div *ngIf="f.password.touched && f.password.invalid" class="alert alert-danger">
+							<div *ngIf="f.password.errors?.required">Password is required.</div>
+						</div>
+					</div>
+
+
+                    <div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fa fa-lock"></i></span>
+						</div>
+						<input 
+							formControlName="confirm_password"
+							id="confirm_password" 
+							type="password" 
+							placeholder="confirm password"
+							class="form-control">
+
+					   <div *ngIf="f.confirm_password.touched && f.confirm_password.invalid" class="alert alert-danger">
+							<div *ngIf="f.confirm_password.errors?.required">Password is required.</div>
+							<div *ngIf="f.confirm_password.errors?.confirmedValidator">Password and Confirm Password must be match.</div>
+					   </div>	
+				    </div>
+
+         
+					<div class="submit">
+						<button class="btn btn-primary" type="submit" [disabled]="!form.valid">Submit</button>
+					</div>
+
+				</form>
+			</div>			
+		</div>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+  <head>
+  	<title>Sidebar 01</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">		
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  </head>
+
+  <body>
+		
+		<div class="wrapper d-flex align-items-stretch">
+			<nav id="sidebar">
+				<div class="p-4 pt-5">
+                        
+                    <ul class="list-unstyled components mb-5">
+                    <li class="active">
+                    <a [routerLink]="" (click)="showseekerlist()">Jobseeker's's list</a>
+                        
+                    </li>
+                    <li>
+                    <a [routerLink]="" (click)="showemplist()">Employers's list</a>
+                    </li>
+                    <li>
+                        <a [routerLink]="" (click)="showapplicants()">Applicant's list</a>
+                    
+                    </li>
+                    <li>
+                        <a [routerLink]="" (click)="showjobs()">Jobposts</a>
+                    </li>
+                    
+                    </ul>
+
+	            </div>
+        	</nav>
+
+        <!-- Page Content  -->
+            <div id="content" class="p-4 p-md-5">
+
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container-fluid">
+
+                        <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                        <i class="fa fa-bars"></i>
+                        <span class="sr-only">Toggle Menu</span>
+                        </button>
+                
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="nav navbar-nav ml-auto">
+                                <li class="nav-item active">
+                                <button class="btn btn-danger my-2 my-sm-0" (click)="onLogout()" >Logout</button>
+                            
+                            </ul>
+                        </div>
+                     </div>
+                </nav>
+
+                <div class="tab1" *ngIf="counter1">  
+                
+                    <table id="customers" style="width:100%" border="1">  
+                        <tr> 
+                            <th>FullName</th>
+                            <th>PhoneNumber</th>
+                            <th>Email</th>
+                            <th>Delete</th>   
+                    
+                        </tr>
+
+                        <tr *ngFor="let j1 of jobseeker">
+                            <td>{{j1.fullName}}</td>
+                            <td>{{j1.phoneNumber}}</td>
+                            <td>{{j1.email}}</td>
+                            <td><button class="btn btn-danger" (click)="deleteDataj(j1.jobSeekerId)">Delete</button></td>
+                            
+                            
+                        </tr>
+        
+                    </table>
+                </div>
+
+
+                <div class="tab2" *ngIf="counter2">  
+        
+                    <table id="customers" style="width:100%" border="1">  
+                        <tr> 
+                           
+                            <th>CompanyName</th>
+                            <th>ContactPerson</th>
+                            <th>Location</th>
+                            <th>ContactNumber</th>
+                            <th>Email</th>
+                            <th>Delete</th>   
+                           
+                       </tr>
+                       <tr *ngFor="let j of employer">
+                            
+                            <td>{{j.companyName}}</td>
+                            <td>{{j.contactPerson}}</td>
+                            <td>{{j.location}}</td>
+                            <td>{{j.contactNumber}}</td>
+                            <td>{{j.email}}</td>
+                            <td><button class="btn btn-danger" (click)="deleteDataem(j.employersId)">Delete</button></td>
+                
+                       </tr>
+                
+                    </table>
+                   </div>
+
+                   <div class="tab3" *ngIf="counter3">  
+        
+
+                    <form [formGroup]="form" autocomplete="off" (ngSubmit)="submit()">
+                        <input 
+        
+                        formControlName="search"
+                        id="search" 
+                        type="text" 
+                        [(ngModel)]="job"
+                        placeholder="Search by jobtitle"
+                        class="form-control">
+                        <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Search</button>
+                    </form>
+
+                    <table id="customers" style="width:100%" border="1">  
+                        <tr>
+                            <th>CompanyName</th> 
+                            <th>JobTitle</th>
+                            <th>JobDescription</th>
+                            <th>JobType</th>
+                            <th>Experience</th>
+                            <th>Salary</th>
+                            <th>Vacancy</th> 
+                            <th>Qualification</th>
+                            <th>Skills</th>
+                            <th>LastDate</th>
+                            <th>Location</th>
+
+                        </tr>
+                        <tr *ngFor="let j2 of joblists">
+                            <td>{{j2.companyName}}</td> 
+                            <td>{{j2.jobTitle}}</td>
+                            <td>{{j2.jobDescription}}</td>
+                            <td>{{j2.jobType}}</td>
+                            <td>{{j2.experience}}</td>
+                            <td>{{j2.salary}}</td>
+                            <td>{{j2.vacancy}}</td> 
+                            <td>{{j2.qualification}}</td>
+                            <td>{{j2.skills}}</td>
+                            <td>{{j2.lastDate}}</td>
+                            <td>{{j2.location}}</td> 
+                        </tr>
+
+                        </table>
+                        </div>
+
+
+
+                        <div class="tab4" *ngIf="counter4">  
+        
+                        <table id="customers" style="width:100%" border="1">  
+                            <tr>
+                                <th>CompanyName</th> 
+                                <th>JobTitle</th>
+                                <th>JobDescription</th>
+                                <th>JobType</th>
+                                <th>Experience</th>
+                                <th>Salary</th>
+                                <th>Vacancy</th> 
+                                <th>Qualification</th>
+                                <th>Skills</th>
+                                <th>LastDate</th>
+                                <th>Location</th>
+    
+                            </tr>
+                            <tr *ngFor="let j2 of joblists1">
+                                <td>{{j2.companyName}}</td> 
+                                <td>{{j2.jobTitle}}</td>
+                                <td>{{j2.jobDescription}}</td>
+                                <td>{{j2.jobType}}</td>
+                                <td>{{j2.experience}}</td>
+                                <td>{{j2.salary}}</td>
+                                <td>{{j2.vacancy}}</td> 
+                                <td>{{j2.qualification}}</td>
+                                <td>{{j2.skills}}</td>
+                                <td>{{j2.lastDate}}</td>
+                                <td>{{j2.location}}</td> 
+                            </tr>
+    
+                            </table>
+                            </div>
+
+                            <div class="tab5" *ngIf="counter5">  
+        
+                                <table id="customers" style="width:100%" border="1">  
+                                    <tr>
+                                      <th>Jobtitle</th>
+                                      <th>Jobtype</th>
+                                      <th>LastDate</th>
+                                      <th>Applicant's name</th>
+                                      <th>Applicant's cv</th>
+                                    </tr>
+                                    <tr *ngFor="let i of applicants">
+                                      <td>{{i.jobTitle}}</td>
+                                      <td>{{i.jobType}}</td>
+                                      <td>{{i.lastDate}}</td>
+                                      <td>{{i.name}}</td>
+                                      <td><a href={{createlink(i.filepath)}}>CV</a></td>
+                                    </tr>
+                                    
+                        
+                                  </table>
+                                  </div>
+
+
+
+	     	</div>
+        
+        </div>
+    </body>
+</html>
+
+  
+
